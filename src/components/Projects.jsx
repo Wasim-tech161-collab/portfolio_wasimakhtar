@@ -246,18 +246,14 @@ function ProjectCard({ project, index }) {
 
         <ProjectMedia project={project} />
 
-        <div className="absolute inset-0 bg-[#0B1120]/0 group-hover:bg-[#0B1120]/70 transition-all duration-300 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100">
+        <div className="absolute inset-0 bg-[#0B1120]/0 group-hover:bg-[#0B1120]/70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
           <a
-            href={project.live}
-            className="px-4 py-2 bg-[#E3A857] text-[#3A2A0E] text-sm font-medium rounded-sm hover:bg-[#F0BC72] transition -translate-y-2 group-hover:translate-y-0 duration-300"
+            href={project.video ? project.video : project.image}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2 bg-[#E3A857] text-[#3A2A0E] text-sm font-medium rounded-sm hover:bg-[#F0BC72] transition -translate-y-2 group-hover:translate-y-0 duration-300"
           >
-            Live demo
-          </a>
-          <a
-            href={project.code}
-            className="px-4 py-2 border border-[#F2EFE9]/40 text-[#F2EFE9] text-sm rounded-sm hover:border-[#F2EFE9] transition -translate-y-2 group-hover:translate-y-0 duration-300 delay-75"
-          >
-            Code
+            {project.video ? "Live Demo" : "Live Preview"}
           </a>
         </div>
       </div>
@@ -296,16 +292,20 @@ function Projects() {
   const visible = useMemo(
     () =>
       active === "All" ? projects : projects.filter((p) => p.type === active),
-    [active]
+    [active],
   );
 
   return (
-    <section id="projects" className="bg-[#0B1120] px-6 md:px-16 py-24 border-t border-[#22304C]">
+    <section
+      id="projects"
+      className="bg-[#0B1120] px-6 md:px-16 py-24 border-t border-[#22304C]"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div className="max-w-2xl">
             <span className="font-mono text-xs tracking-[0.25em] text-[#E3A857]">
-              SELECTED WORK — {String(projects.length).padStart(2, "0")} PROJECTS
+              SELECTED WORK — {String(projects.length).padStart(2, "0")}{" "}
+              PROJECTS
             </span>
 
             <h2 className="font-display text-4xl md:text-6xl font-medium text-[#F2EFE9] mt-5 leading-[1.05]">
@@ -339,7 +339,11 @@ function Projects() {
           {visible.map((project) => {
             const originalIndex = projects.indexOf(project);
             return (
-              <ProjectCard key={project.title} project={project} index={originalIndex} />
+              <ProjectCard
+                key={project.title}
+                project={project}
+                index={originalIndex}
+              />
             );
           })}
         </div>
