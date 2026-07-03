@@ -1,22 +1,30 @@
 import { PenTool, Code, TrendingUp } from "lucide-react";
 
+/*
+  Same type system as Navbar.jsx / Hero.jsx / About.jsx / Skills.jsx / Projects.jsx / CaseStudy.jsx:
+  Fraunces (display) / Inter (body) / JetBrains Mono (tags, labels)
+*/
+
 const services = [
   {
-    title: "UI/UX Design",
+    tag: "SRV.01",
+    title: "UI/UX design",
     icon: PenTool,
     quote: "Design is intelligence made visible.",
     description:
       "Creating modern, intuitive, and user-friendly interfaces using Figma and Canva with a focus on user experience.",
   },
   {
-    title: "Frontend Development",
+    tag: "SRV.02",
+    title: "Frontend development",
     icon: Code,
     quote: "Turning ideas into responsive experiences.",
     description:
       "Building fast, responsive, and interactive websites using HTML, CSS, JavaScript, React.js, and modern web technologies.",
   },
   {
-    title: "Digital Marketing & SEO",
+    tag: "SRV.03",
+    title: "Digital marketing & SEO",
     icon: TrendingUp,
     quote: "Growing brands through smart digital strategies.",
     description:
@@ -28,62 +36,65 @@ function Services() {
   return (
     <section
       id="services"
-      className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 border-t border-gray-800"
+      className="bg-[#0B1120] py-16 sm:py-24 px-4 sm:px-6 md:px-16 border-t border-[#22304C]"
     >
-      {/* Heading */}
-      <div className="text-center mb-10 sm:mb-14">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">
-          My <span className="text-indigo-400">Services</span>
-        </h2>
+      <div className="max-w-6xl mx-auto">
 
-        <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base">
-          I combine design, development, and digital marketing to create
-          beautiful digital experiences and help brands grow online.
-        </p>
-      </div>
+        {/* Heading */}
+        <div className="max-w-2xl mx-auto text-center">
+          <span className="font-mono text-xs tracking-[0.25em] text-[#E3A857]">
+            WHAT I DO — 03 SERVICES
+          </span>
 
-      {/* Service Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <h2 className="font-display text-4xl sm:text-5xl font-medium text-[#F2EFE9] mt-5 leading-[1.05]">
+            My services
+          </h2>
 
-        {services.map((service, index) => {
-          const Icon = service.icon;
+          <p className="font-sans text-[#93A0B7] mt-6 leading-8 text-sm sm:text-base">
+            I combine design, development, and digital marketing to create
+            beautiful digital experiences and help brands grow online.
+          </p>
+        </div>
 
-          return (
-            <div
-              key={index}
-              className="
-                bg-[#161E36]
-                border border-gray-800
-                rounded-2xl
-                p-6 sm:p-8
-                hover:border-indigo-500
-                hover:-translate-y-2
-                transition-all duration-300
-              "
-            >
-              {/* Icon */}
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-5 sm:mb-6">
-                <Icon size={28} className="text-indigo-400" />
+        {/* Service Cards */}
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {services.map((service) => {
+            const Icon = service.icon;
+
+            return (
+              <div
+                key={service.tag}
+                className="group bg-[#0F1830] border border-[#22304C] rounded-sm p-6 sm:p-8 hover:border-[#E3A857]/50 hover:-translate-y-1.5 transition-all duration-300"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-sm border border-[#22304C] bg-[#0B1120] flex items-center justify-center group-hover:border-[#E3A857]/50 transition-colors duration-300">
+                    <Icon size={22} className="text-[#E3A857]" />
+                  </div>
+
+                  <span className="font-mono text-[10px] tracking-widest text-[#93A0B7] mt-1">
+                    {service.tag}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-xl sm:text-2xl font-medium text-[#F2EFE9]">
+                  {service.title}
+                </h3>
+
+                <div className="border-l-2 border-[#E3A857]/50 pl-3 mt-4">
+                  <p className="font-display italic text-[#F2EFE9]/80 text-sm sm:text-base leading-relaxed">
+                    {service.quote}
+                  </p>
+                </div>
+
+                <p className="font-sans text-[#93A0B7] mt-5 leading-6 sm:leading-7 text-sm sm:text-base">
+                  {service.description}
+                </p>
               </div>
+            );
+          })}
 
-              {/* Title */}
-              <h3 className="text-xl sm:text-2xl font-semibold text-white">
-                {service.title}
-              </h3>
-
-              {/* Quote */}
-              <p className="text-indigo-300 italic mt-3 text-sm sm:text-base">
-                "{service.quote}"
-              </p>
-
-              {/* Description */}
-              <p className="text-gray-400 mt-4 sm:mt-5 leading-6 sm:leading-7 text-sm sm:text-base">
-                {service.description}
-              </p>
-            </div>
-          );
-        })}
-
+        </div>
       </div>
     </section>
   );
